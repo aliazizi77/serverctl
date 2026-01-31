@@ -1,3 +1,9 @@
+#!/bin/bash
+
+BASE_DIR="/opt/serverctl"
+source "$BASE_DIR/lib/logger.sh"
+source "$BASE_DIR/lib/colors.sh"
+
 site_create() {
 
   echo -e "${CYAN}Create New Apache Website${NC}"

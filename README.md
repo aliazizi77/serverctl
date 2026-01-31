@@ -38,7 +38,4 @@ Example commands for the `site` module (if present):
 Create a new shell file in `modules/` and implement the `start`, `stop`, and `status` entrypoints. Load the module from `serverctl.sh` following the existing loading pattern.
 
 ## Contributing
-Open issues for bugs or small improvements. For larger changes, include a brief description in your PR.
 
-## License
-No license specified. Add a `LICENSE` file if you want to set project licensing.
