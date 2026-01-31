@@ -41,6 +41,30 @@ case "$COMMAND" in
   help|"")
     show_help
     ;;
+  db)
+  source "$BASE_DIR/modules/db.sh"
+  case "$SUBCOMMAND" in
+    list)
+      db_list
+      ;;
+    users)
+      db_users
+      ;;
+    grants)
+      db_grants
+      ;;
+    create)
+      db_create
+      ;;
+    help|"")
+      db_help
+      ;;
+    *)
+      log_error "Unknown db command"
+      ;;
+  esac
+  ;;
+
   *)
     log_error "Unknown command"
     show_help
