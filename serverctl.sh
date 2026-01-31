@@ -15,10 +15,16 @@ show_help() {
   echo "  serverctl <command> <subcommand>"
   echo ""
   echo "Commands:"
-  echo "  site create     Create new website (Apache)"
-  echo "  site list       List all websites"
-  echo "  help            Show this help"
+  echo "  site        Website management (Apache)"
+  echo "  db          Database management (MySQL/MariaDB)"
+  echo "  help        Show this help"
+  echo ""
+  echo "Examples:"
+  echo "  serverctl site create"
+  echo "  serverctl site list"
+  echo "  serverctl db list"
 }
+
 
 case "$COMMAND" in
   site)
@@ -64,7 +70,6 @@ case "$COMMAND" in
       ;;
   esac
   ;;
-
   *)
     log_error "Unknown command"
     show_help
