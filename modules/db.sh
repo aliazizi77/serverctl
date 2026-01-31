@@ -5,6 +5,7 @@ source "$BASE_DIR/lib/logger.sh"
 source "$BASE_DIR/lib/colors.sh"
 
 MYSQL="mysql -u root"
+MYSQL_CMD="$MYSQL"
 
 db_list() {
   echo -e "${CYAN}Databases:${NC}"
