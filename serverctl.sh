@@ -5,25 +5,32 @@ BASE_DIR="/opt/serverctl"
 source "$BASE_DIR/lib/colors.sh"
 source "$BASE_DIR/lib/logger.sh"
 
+
 COMMAND=$1
 SUBCOMMAND=$2
 
 show_help() {
-  echo "ServerCTL - Personal Server Manager"
-  echo ""
-  echo "Usage:"
-  echo "  serverctl <command> <subcommand>"
-  echo ""
-  echo "Commands:"
-  echo "  site        Website management (Apache)"
-  echo "  db          Database management (MySQL/MariaDB)"
-  echo "  help        Show this help"
-  echo ""
-  echo "Examples:"
-  echo "  serverctl site create"
-  echo "  serverctl site list"
-  echo "  serverctl db list"
+cat <<EOF
+Usage: serverctl [command]
+
+Commands:
+  site list                 List all Apache sites
+  site create <domain>      Create new Apache site
+
+  wp install               Install WordPress on existing site
+
+
+  db list                   List databases
+  db users                  List database users
+  db grants                 Show user-database relations
+  db create                 Create database and user
+  db delete                 Delete database (optionally with user)
+
+
+  help                      Show this help
+EOF
 }
+
 
 
 case "$COMMAND" in
@@ -44,6 +51,15 @@ case "$COMMAND" in
         ;;
     esac
     ;;
+  wp)
+    source "$BASE_DIR/modules/wp.sh"
+  case "$2" in
+    install) wp_install ;;
+    *)
+      echo "Unknown wp command"
+      ;;
+  esac
+  ;;
   help|"")
     show_help
     ;;
@@ -65,6 +81,9 @@ case "$COMMAND" in
     help|"")
       db_help
       ;;
+    delete)
+       db_delete
+       ;;
     *)
       log_error "Unknown db command"
       ;;

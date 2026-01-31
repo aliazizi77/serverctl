@@ -1,41 +1,180 @@
-# serverctl
+# ServerCTL
 
-A small shell-based server control utility for managing local and remote services.
+ServerCTL is a lightweight, open-source CLI tool for managing Linux servers. It is designed for personal and multi-server use, focusing on simplicity, transparency, and extensibility.
 
-## Overview
-This repository contains `serverctl.sh`, a lightweight controller script, supporting modules under the `modules/` directory and helper libraries in `lib/`. It provides simple commands to start, stop and check the status of services.
+Currently supported:
 
-## Prerequisites
-- macOS or Linux
-- bash
+- Apache website management
+- MySQL/MariaDB database management
 
-## Quick Start
-Make the script executable and show help:
+The project is written in Bash and works on **Ubuntu 24.04**.
+
+---
+
+## Features
+
+### Website Management (Apache)
+
+- Create new Apache VirtualHost
+- Auto-create document root
+- Enable site
+- Issue SSL certificates via Let’s Encrypt
+- List enabled sites
+
+### Database Management (MySQL/MariaDB)
+
+- List databases
+- List database users
+- View user–database permissions (grants)
+- Create database and user
+- Assign permissions
+
+---
+
+## Installation
+
+### 1. Clone the repository
 
 ```bash
-chmod +x serverctl.sh
-./serverctl.sh --help
+sudo mkdir -p /opt
+cd /opt
+sudo git clone https://github.com/YOUR_USERNAME/serverctl.git
+cd serverctl
+sudo chmod +x serverctl.sh
 ```
 
-Example commands for the `site` module (if present):
+### 2. Add `serverctl` to PATH
 
 ```bash
-./serverctl.sh site start
-./serverctl.sh site status
-./serverctl.sh site stop
+sudo ln -s /opt/serverctl/serverctl.sh /usr/local/bin/serverctl
 ```
+
+Verify installation:
+
+```bash
+serverctl help
+```
+
+---
+
+## Requirements
+
+- Ubuntu 24.04
+- Apache 2
+- MySQL or MariaDB
+- Certbot (for SSL)
+
+Install required packages:
+
+```bash
+sudo apt update
+sudo apt install -y apache2 mysql-client certbot python3-certbot-apache
+```
+
+---
+
+## Usage
+
+### Global Help
+
+```bash
+serverctl help
+```
+
+---
+
+## Site Management
+
+### Create a new site
+
+```bash
+serverctl site create
+```
+
+### List enabled sites
+
+```bash
+serverctl site list
+```
+
+### Site help
+
+```bash
+serverctl site help
+```
+
+---
+
+## Database Management
+
+### List databases
+
+```bash
+serverctl db list
+```
+
+### List database users
+
+```bash
+serverctl db users
+```
+
+### Show user permissions
+
+```bash
+serverctl db grants
+```
+
+### Create database and user
+
+```bash
+serverctl db create
+```
+
+### Database help
+
+```bash
+serverctl db help
+```
+
+---
 
 ## Project Structure
-- lib/: helper functions and logger
-  - colors.sh — output color helpers
-  - helpers.sh — shared helper functions
-  - logger.sh — simple logging utils
-- modules/: functional modules
-  - site.sh — example module for managing a website
-- serverctl.sh: main entrypoint script
 
-## Adding a New Module
-Create a new shell file in `modules/` and implement the `start`, `stop`, and `status` entrypoints. Load the module from `serverctl.sh` following the existing loading pattern.
+```
+serverctl/
+├── serverctl.sh
+├── modules/
+│   ├── site.sh
+│   └── db.sh
+├── lib/
+│   ├── logger.sh
+│   └── colors.sh
+└── README.md
+```
 
-## Contributing
+---
+
+## Roadmap
+
+Planned features:
+
+- Database backup & restore
+- Site–database linking
+- WordPress automation
+- PHP version management
+- Firewall & security tools
+- Multi-server profiles
+
+---
+
+## License
+
+MIT License
+
+---
+
+## Philosophy
+
+ServerCTL is intentionally simple. No hidden magic, no heavy dependencies — just readable scripts that you control.
 
